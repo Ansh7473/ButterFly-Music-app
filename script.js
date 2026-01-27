@@ -11,30 +11,62 @@ let songList = [];
 let currentIndex = 0;
 
 // 1. FETCH TRAVIS SCOTT SONGS
-async function getMusic() {
-    const artist = "travis+scott"; 
-    const url = `https://itunes.apple.com/search?term=${artist}&entity=song&limit=10`;
+let currentTerm = "travis+scott";
+
+async function getMusic(term = currentTerm) {
+    // 1. Update the search term if provided
+    currentTerm = term;
+    
+    // 2. Format the term for the URL (spaces become +)
+    // "term" parameter must be URL-encoded
+    const formattedTerm = term.replace(/\s+/g, '+');
+    
+    const url = `https://itunes.apple.com/search?term=${formattedTerm}&entity=song&limit=10`;
 
     try {
         const response = await fetch(url);
         const data = await response.json();
         
         if (data.results.length > 0) {
+            // Mapping iTunes JSON response keys to our player format
             songList = data.results.map(song => ({
                 name: song.trackName,
                 artist_name: song.artistName,
-                audio: song.previewUrl,
-                cover: song.artworkUrl100.replace('100x100', '300x300') // Get High Res Image
+                audio: song.previewUrl, // 30-second preview URL
+                cover: song.artworkUrl100.replace('100x100', '600x600') // Get High Res Image
             }));
 
-            console.log("Playlist Loaded");
+            console.log(`Playlist Loaded for: ${term}`);
+            
+            // Reset index and load the first new song
+            currentIndex = 0;
             loadSong(currentIndex);
+            
+            // Optional: Update the "Hero" text to match the search
+            document.querySelector('.hero-content h1').innerText = term.replace(/\+/g, ' ');
+            document.querySelector('.hero-content .stats').innerText = "Top Results";
+            
+        } else {
+            alert("No songs found! Try a different artist.");
         }
     } catch (error) {
-        console.error("iTunes failed:", error);
+        console.error("iTunes API failed:", error);
     }
 }
 
+// --- NEW SEARCH LISTENER ---
+const searchInput = document.getElementById('search-input');
+
+searchInput.addEventListener('keypress', (e) => {
+    // Check if the user hit "Enter"
+    if (e.key === 'Enter') {
+        const query = searchInput.value.trim();
+        if (query.length > 0) {
+            getMusic(query); // Call API with new name
+            searchInput.blur(); // Remove focus (hide keyboard on mobile)
+        }
+    }
+});
 // 2. LOAD SONG (Now with Album Art & Defaults)
 function loadSong(index) {
     const track = songList[index];

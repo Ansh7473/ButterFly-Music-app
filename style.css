@@ -242,3 +242,39 @@ body {
     border-radius: 3px;
     transition: width 0.1s linear; /* Smooth movement */
 }
+
+
+/* Add this to your style.css */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 0;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-left: 10px;
+    outline: none;
+    width: 100%;
+    /* Initially hide the placeholder color to look clean */
+}
+
+.search-box input::placeholder {
+    color: var(--text-dim);
+    opacity: 0.7;
+}
+
+/* Optional: Add a focus effect */
+.search-box:focus-within {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 10px; /* Expand when typing */
+    margin: -8px -10px; /* Offset margin to keep alignment */
+}
