@@ -22,7 +22,6 @@ async function getMusic(term = currentTerm) {
     const formattedTerm = term.replace(/\s+/g, '+');
     
     const url = `https://itunes.apple.com/search?term=${formattedTerm}&entity=song&limit=10`;
-
     try {
         const response = await fetch(url);
         const data = await response.json();
