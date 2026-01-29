@@ -1,4 +1,4 @@
-# 🎵 Dark Vibe Player | Web Music App
+# 🎵 Music Player | Web Music App
 
 > A fully functional, responsive music player web application that streams real-time data from the Apple iTunes API. Built for the "Dark Vibe" aesthetic.
 
