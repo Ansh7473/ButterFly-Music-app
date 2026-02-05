@@ -10,7 +10,7 @@
     --accent-color: #c38ef5; /* Neon Purple */
     --player-height: 90px;
     --sidebar-width: 240px;
-    --nav-height-mobile: 65px; /* Taller for better visibility */
+    --nav-height-mobile: 65px; 
     --transition-fast: 0.2s ease;
 }
 
@@ -53,7 +53,7 @@ body {
     gap: 24px;
     border-right: 1px solid #181818;
     grid-row: 1 / 2;
-    z-index: 10; /* Keep it safe */
+    z-index: 10;
 }
 
 .logo h2 {
@@ -80,7 +80,6 @@ body {
 .nav-links li i {
     margin-right: 15px;
     font-size: 1.3rem;
-    /* FIX: Prevents icon from getting squashed */
     flex-shrink: 0; 
     min-width: 24px; 
     text-align: center;
@@ -90,34 +89,8 @@ body {
     color: var(--text-main);
 }
 
-/* Search Box */
-.search-box {
-    display: flex;
-    align-items: center;
-    background: transparent;
-    transition: 0.3s;
-    border-radius: 4px;
-    width: 100%;
-}
-
-.search-box input {
-    background: transparent;
-    border: none;
-    color: var(--text-main);
-    font-size: 1rem;
-    font-weight: 600;
-    margin-left: 10px;
-    outline: none;
-    width: 100%;
-}
-
-.search-box input::placeholder {
-    color: var(--text-dim);
-    opacity: 0.7;
-}
-
 /* =========================================
-   5. MAIN CONTENT AREA
+   5. MAIN CONTENT AREA & HEADER
    ========================================= */
 .main-content {
     background: linear-gradient(to bottom, #1e1e1e, var(--bg-black));
@@ -128,7 +101,64 @@ body {
     grid-row: 1 / 2;
 }
 
-/* Hero Section */
+/* --- NEW HEADER STYLING --- */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 50px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.circle-btn {
+    background-color: rgba(0,0,0,0.7);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Search Box Styling */
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff1a; /* Semi-transparent */
+    padding: 8px 20px;
+    border-radius: 30px; /* Pill shape */
+    width: 300px;
+    transition: 0.3s;
+}
+
+.search-box:hover, .search-box:focus-within {
+    background-color: #ffffff33; 
+}
+
+.search-box i {
+    color: var(--text-dim);
+    margin-right: 10px;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 0.95rem;
+    width: 100%;
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: var(--text-dim);
+}
+
+/* --- HERO SECTION --- */
 .hero-section {
     height: 40vh;
     min-height: 300px;
@@ -153,7 +183,7 @@ body {
     letter-spacing: 1px;
 }
 
-/* Song List */
+/* --- SONG LIST --- */
 .song-list h3 {
     margin: 30px 0 20px;
     font-size: 1.5rem;
@@ -174,7 +204,7 @@ body {
 }
 
 /* =========================================
-   6. PLAYER BAR (FIXED VISIBILITY)
+   6. PLAYER BAR
    ========================================= */
 .player-bar {
     grid-column: 1 / -1;
@@ -185,7 +215,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 25px;
-    z-index: 2000; /* Super high z-index to stay on top */
+    z-index: 2000;
 }
 
 .now-playing {
@@ -216,7 +246,6 @@ body {
     font-size: 0.85rem;
 }
 
-/* Controls */
 .player-controls {
     width: 45%;
     display: flex;
@@ -234,7 +263,6 @@ body {
     color: var(--text-dim);
 }
 
-/* FIX: Icons won't vanish */
 .control-buttons i {
     cursor: pointer;
     flex-shrink: 0; 
@@ -250,7 +278,6 @@ body {
     color: var(--text-main);
 }
 
-/* Progress Bar */
 .progress-container {
     width: 100%;
     display: flex;
@@ -276,7 +303,6 @@ body {
     border-radius: 2px;
 }
 
-/* Volume */
 .volume-controls {
     width: 25%;
     display: flex;
@@ -286,7 +312,7 @@ body {
 }
 
 .volume-controls i {
-    flex-shrink: 0; /* FIX: Prevents icon disappearing */
+    flex-shrink: 0;
 }
 
 .volume-bar {
@@ -309,17 +335,16 @@ body {
 }
 
 /* =========================================
-   7. MOBILE OPTIMIZATION (UPDATED FIX)
+   7. MOBILE OPTIMIZATION (UPDATED)
    ========================================= */
 @media screen and (max-width: 768px) {
 
-    /* Reset Layout */
     .main-wrapper {
         display: block;
         position: relative;
     }
 
-    /* Bottom Navigation Bar */
+    /* Bottom Nav */
     .sidebar {
         position: fixed;
         bottom: 0;
@@ -334,15 +359,13 @@ body {
         border-top: 1px solid #222;
         background-color: rgba(0,0,0,0.95);
         backdrop-filter: blur(10px);
-        z-index: 1001; /* Above content */
+        z-index: 1001;
     }
 
-    /* Hide unneeded elements */
-    .logo, .playlists, .search-box input, .section-title {
+    .logo, .playlists, .section-title {
         display: none !important;
     }
 
-    /* Fix Icons in Bottom Nav */
     .nav-links ul {
         display: flex;
         width: 100%;
@@ -356,7 +379,7 @@ body {
         font-size: 0.7rem;
         padding: 0;
         gap: 5px;
-        width: 60px; /* Touch target */
+        width: 60px;
     }
 
     .nav-links li i {
@@ -369,25 +392,37 @@ body {
         color: var(--text-main);
     }
 
-    /* Fix Search Icon */
-    .search-box {
-        width: auto;
-        display: contents; /* Removes wrapper effect */
+    /* --- MOBILE HEADER FIX --- */
+    .top-bar {
+        padding: 0;
+        margin-bottom: 15px;
     }
-    
-    #search-container .search-box i {
-        display: block !important;
-        font-size: 1.4rem;
+
+    /* Hide arrows on mobile */
+    .nav-buttons {
+        display: none;
+    }
+
+    /* Expand Search Box */
+    .search-box {
+        width: 100%;
+        background-color: #333;
+    }
+
+    /* Ensure Input is visible and text is large enough */
+    .search-box input {
+        display: block;
+        font-size: 16px; /* Prevents iPhone zoom */
     }
 
     /* Content Area */
     .main-content {
         width: 100%;
         padding: 15px;
-        padding-bottom: 180px; /* Huge padding so nothing is hidden */
+        padding-bottom: 180px;
     }
 
-    /* Floating Player Bar */
+    /* Floating Player */
     .player-bar {
         position: fixed;
         bottom: var(--nav-height-mobile);
@@ -398,10 +433,9 @@ body {
         background-color: #1a1a1a;
         border-top: 1px solid #333;
         border-bottom: 1px solid #111;
-        z-index: 1002; /* Highest Priority */
+        z-index: 1002;
     }
 
-    /* Mobile Controls Visibility Fix */
     .now-playing {
         width: 65%; 
     }
@@ -410,23 +444,21 @@ body {
         width: 35%;
         align-items: flex-end;
         gap: 0;
-        flex-direction: row; /* Keep buttons in row */
+        flex-direction: row;
         justify-content: flex-end;
     }
 
-    /* Hide complex controls, keep Play/Next */
     #shuffle, #prev, #repeat, .progress-container, .volume-controls {
         display: none !important;
     }
 
-    /* Ensure Play/Next buttons are visible */
     .control-buttons {
         gap: 20px;
         width: auto;
     }
 
     .play-main {
-        font-size: 2.2rem; /* Big Play Button */
+        font-size: 2.2rem;
         display: block;
     }
     
@@ -435,7 +467,6 @@ body {
         display: block;
     }
 
-    /* Song List Mobile */
     .song-row {
         grid-template-columns: 50px 1fr 40px; 
         font-size: 0.9rem;
