@@ -10,7 +10,7 @@
     --accent-color: #c38ef5; /* Neon Purple */
     --player-height: 90px;
     --sidebar-width: 240px;
-    --nav-height-mobile: 60px; /* New variable for mobile */
+    --nav-height-mobile: 65px; /* Taller for better visibility */
     --transition-fast: 0.2s ease;
 }
 
@@ -28,11 +28,11 @@ body {
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     height: 100vh;
-    overflow: hidden; /* Prevents double scrolling */
+    overflow: hidden; 
 }
 
 /* =========================================
-   3. LAYOUT STRUCTURE (DESKTOP DEFAULT)
+   3. LAYOUT STRUCTURE (DESKTOP)
    ========================================= */
 .main-wrapper {
     display: grid;
@@ -53,6 +53,7 @@ body {
     gap: 24px;
     border-right: 1px solid #181818;
     grid-row: 1 / 2;
+    z-index: 10; /* Keep it safe */
 }
 
 .logo h2 {
@@ -79,13 +80,17 @@ body {
 .nav-links li i {
     margin-right: 15px;
     font-size: 1.3rem;
+    /* FIX: Prevents icon from getting squashed */
+    flex-shrink: 0; 
+    min-width: 24px; 
+    text-align: center;
 }
 
 .nav-links li:hover, .nav-links li.active {
     color: var(--text-main);
 }
 
-/* Search Box Styling */
+/* Search Box */
 .search-box {
     display: flex;
     align-items: center;
@@ -118,17 +123,9 @@ body {
     background: linear-gradient(to bottom, #1e1e1e, var(--bg-black));
     overflow-y: auto;
     padding: 20px 40px;
-    padding-bottom: 120px; /* Extra padding so content isn't hidden behind player */
+    padding-bottom: 120px; 
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-}
-
-.main-content::-webkit-scrollbar {
-    width: 12px;
-}
-.main-content::-webkit-scrollbar-thumb {
-    background-color: #333;
-    border-radius: 6px;
 }
 
 /* Hero Section */
@@ -177,7 +174,7 @@ body {
 }
 
 /* =========================================
-   6. PLAYER BAR (THE BRAIN)
+   6. PLAYER BAR (FIXED VISIBILITY)
    ========================================= */
 .player-bar {
     grid-column: 1 / -1;
@@ -188,7 +185,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 25px;
-    z-index: 100;
+    z-index: 2000; /* Super high z-index to stay on top */
 }
 
 .now-playing {
@@ -237,6 +234,12 @@ body {
     color: var(--text-dim);
 }
 
+/* FIX: Icons won't vanish */
+.control-buttons i {
+    cursor: pointer;
+    flex-shrink: 0; 
+}
+
 .control-buttons i:hover {
     color: var(--text-main);
     transform: scale(1.1);
@@ -282,6 +285,10 @@ body {
     gap: 10px;
 }
 
+.volume-controls i {
+    flex-shrink: 0; /* FIX: Prevents icon disappearing */
+}
+
 .volume-bar {
     width: 100px;
     height: 4px;
@@ -302,17 +309,17 @@ body {
 }
 
 /* =========================================
-   7. MOBILE OPTIMIZATION (THE MAGIC)
+   7. MOBILE OPTIMIZATION (UPDATED FIX)
    ========================================= */
 @media screen and (max-width: 768px) {
 
-    /* 1. Reset Layout to Stack */
+    /* Reset Layout */
     .main-wrapper {
-        display: block; /* Remove Grid */
+        display: block;
         position: relative;
     }
 
-    /* 2. Transform Sidebar into Bottom Navigation */
+    /* Bottom Navigation Bar */
     .sidebar {
         position: fixed;
         bottom: 0;
@@ -320,101 +327,120 @@ body {
         width: 100%;
         height: var(--nav-height-mobile);
         padding: 0;
-        flex-direction: row; /* Horizontal icons */
+        flex-direction: row;
         align-items: center;
         justify-content: space-around;
         border-right: none;
         border-top: 1px solid #222;
-        z-index: 1000;
         background-color: rgba(0,0,0,0.95);
         backdrop-filter: blur(10px);
+        z-index: 1001; /* Above content */
     }
 
-    /* Hide Desktop sidebar elements on mobile */
-    .logo, .playlists, .search-box input {
+    /* Hide unneeded elements */
+    .logo, .playlists, .search-box input, .section-title {
         display: none !important;
     }
 
-    /* Adjust Icons for Bottom Nav */
+    /* Fix Icons in Bottom Nav */
     .nav-links ul {
         display: flex;
         width: 100%;
         justify-content: space-around;
+        align-items: center;
     }
 
     .nav-links li {
         flex-direction: column;
+        justify-content: center;
         font-size: 0.7rem;
         padding: 0;
         gap: 5px;
+        width: 60px; /* Touch target */
     }
 
     .nav-links li i {
         margin: 0;
         font-size: 1.4rem;
+        color: var(--text-dim);
     }
     
-    /* Search Icon Fix */
-    .search-box {
-        width: auto;
-        justify-content: center;
+    .nav-links li.active i {
+        color: var(--text-main);
     }
 
-    /* 3. Main Content Full Width */
+    /* Fix Search Icon */
+    .search-box {
+        width: auto;
+        display: contents; /* Removes wrapper effect */
+    }
+    
+    #search-container .search-box i {
+        display: block !important;
+        font-size: 1.4rem;
+    }
+
+    /* Content Area */
     .main-content {
         width: 100%;
         padding: 15px;
-        padding-bottom: 160px; /* Space for player + nav */
+        padding-bottom: 180px; /* Huge padding so nothing is hidden */
     }
 
-    /* 4. Player Bar Floating Above Nav */
+    /* Floating Player Bar */
     .player-bar {
         position: fixed;
-        bottom: var(--nav-height-mobile); /* Sit on top of nav */
+        bottom: var(--nav-height-mobile);
         left: 0;
         width: 100%;
-        height: 65px;
-        padding: 0 10px;
+        height: 70px;
+        padding: 0 15px;
         background-color: #1a1a1a;
         border-top: 1px solid #333;
         border-bottom: 1px solid #111;
+        z-index: 1002; /* Highest Priority */
     }
 
-    /* 5. Mobile Player Controls */
-    .volume-controls {
-        display: none; /* Hide volume on phone */
-    }
-
+    /* Mobile Controls Visibility Fix */
     .now-playing {
-        width: 60%; /* More space for text */
+        width: 65%; 
     }
 
     .player-controls {
-        width: 40%;
-        align-items: flex-end; /* Push buttons right */
+        width: 35%;
+        align-items: flex-end;
         gap: 0;
+        flex-direction: row; /* Keep buttons in row */
+        justify-content: flex-end;
     }
 
-    /* Hide extra controls on mobile, keep Play/Next */
-    #shuffle, #prev, #repeat, .progress-container {
-        display: none; /* Simplify UI */
+    /* Hide complex controls, keep Play/Next */
+    #shuffle, #prev, #repeat, .progress-container, .volume-controls {
+        display: none !important;
     }
 
+    /* Ensure Play/Next buttons are visible */
     .control-buttons {
-        gap: 15px;
+        gap: 20px;
+        width: auto;
     }
 
     .play-main {
-        font-size: 2rem;
+        font-size: 2.2rem; /* Big Play Button */
+        display: block;
     }
     
-    /* 6. Adjust Song List for Mobile */
+    #next {
+        font-size: 1.4rem;
+        display: block;
+    }
+
+    /* Song List Mobile */
     .song-row {
-        grid-template-columns: 50px 1fr 40px; /* Remove Date/Album columns */
+        grid-template-columns: 50px 1fr 40px; 
         font-size: 0.9rem;
     }
     
-    /* Hide the 3rd column (Album/Date) on mobile if exists */
     .song-row > div:nth-child(3) {
         display: none;
     }
