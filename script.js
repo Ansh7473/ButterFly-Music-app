@@ -6,7 +6,7 @@ const progressBar = document.querySelector('.progress-fill');
 const progressContainer = document.querySelector('.progress-bar');
 const volumeBar = document.querySelector('.volume-bar');
 const albumArt = document.querySelector('.album-art'); // Select the Art Box
-
+const heroSection = document.querySelector('.hero-section');
 let songList = [];
 let currentIndex = 0;
 
@@ -66,7 +66,7 @@ searchInput.addEventListener('keypress', (e) => {
         }
     }
 });
-// 2. LOAD SONG (Now with Album Art & Defaults)
+// 2. LOAD SONG (Updated to change the Big Background)
 function loadSong(index) {
     const track = songList[index];
     
@@ -77,7 +77,13 @@ function loadSong(index) {
     // Update Audio
     audio.src = track.audio;
     
-    // UPDATE ALBUM ART (This was missing!)
+    // --- NEW: UPDATE THE BIG HERO BACKGROUND ---
+    if (track.cover) {
+        // We use a "linear-gradient" so the text stays readable over the image
+        heroSection.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0.2), #000000), url(${track.cover})`;
+    }
+
+    // Update the Mini Album Art (Player Bar)
     if (track.cover) {
         albumArt.style.backgroundImage = `url(${track.cover})`;
         albumArt.style.backgroundSize = "cover";
@@ -186,5 +192,6 @@ volumeBar.addEventListener('click', (e) => {
     
     console.log(`Volume: ${Math.round(vol * 100)}%`);
 });
+
 
 getMusic();
