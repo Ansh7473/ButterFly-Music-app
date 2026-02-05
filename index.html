@@ -19,21 +19,13 @@
             <nav class="nav-links">
                 <ul>
                    <li class="active"><i class="fa-solid fa-house"></i> Home</li>
-        
-                    <li id="search-container">
-                     <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                   <input type="text" id="search-input" placeholder="Search Artist...">
-                  </div>
-                </li>
-                <li><i class="fa-solid fa-compact-disc"></i> Library</li>
+                   <li><i class="fa-solid fa-compact-disc"></i> Library</li>
                 </ul>
             </nav>
             <div class="playlists">
                 <p class="section-title">YOUR PLAYLISTS</p>
                 <ul>
                     <li>Dark music</li>
-                    
                     <li>Late Night Sessions</li>
                 </ul>
             </div>
@@ -44,6 +36,11 @@
                 <div class="nav-buttons">
                     <button class="circle-btn"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="circle-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Search Artist...">
                 </div>
             </header>
 
@@ -57,7 +54,7 @@
 
             <section class="song-list">
                 <h3>Popular Tracks</h3>
-                </section>
+            </section>
         </main>
 
         <footer class="player-bar">
@@ -72,23 +69,17 @@
             <div class="player-controls">
                 <div class="control-buttons">
                     <i id="shuffle" class="fa-solid fa-shuffle"></i>
-                    
                     <i id="prev" class="fa-solid fa-backward-step"></i>
-                    
                     <i id="play-btn" class="fa-solid fa-circle-play play-main"></i>
-                    
                     <i id="next" class="fa-solid fa-forward-step"></i>
-                    
                     <i id="repeat" class="fa-solid fa-repeat"></i>
                 </div>
                 
                 <div class="progress-container">
                     <span id="current-time">0:00</span>
-                    
                     <div class="progress-bar">
                         <div class="progress-fill"></div>
                     </div>
-                    
                     <span id="duration">0:00</span>
                 </div>
             </div>
