@@ -11,7 +11,7 @@ let songList = [];
 let currentIndex = 0;
 
 // 1. By Default 
-let currentTerm = "Bado+badi";
+let currentTerm = "Bado+badi 😂";
 
 async function getMusic(term = currentTerm) {
     // 1. Update the search term if provided
@@ -195,4 +195,5 @@ volumeBar.addEventListener('click', (e) => {
 
 
 getMusic();
+
 
