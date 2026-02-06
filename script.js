@@ -10,8 +10,8 @@ const heroSection = document.querySelector('.hero-section');
 let songList = [];
 let currentIndex = 0;
 
-// 1. FETCH TRAVIS SCOTT SONGS
-let currentTerm = "travis+scott";
+// 1. By Default 
+let currentTerm = "Bado+badi";
 
 async function getMusic(term = currentTerm) {
     // 1. Update the search term if provided
@@ -195,3 +195,4 @@ volumeBar.addEventListener('click', (e) => {
 
 
 getMusic();
+
