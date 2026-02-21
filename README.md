@@ -34,7 +34,7 @@
 
 ## 🔮 Future Roadmap
 
-* [ ] Add a Search Bar to let users type any artist name.
+* [ ] Add a Search Bar to let users type any artist name. (already done)
 * [ ] Add a "Repeat One" button feature.
 * [ ] Mobile touch support for the progress slider.
 
